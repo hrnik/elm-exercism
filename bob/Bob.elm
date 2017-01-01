@@ -1,7 +1,6 @@
 module Bob exposing (..)
 
 import Char
-import Regex
 
 
 hey : String -> String
@@ -18,42 +17,14 @@ hey phrase =
 
 isShout : String -> Bool
 isShout phrase =
-    removeChars phrase
-        |> String.words
-        |> removeAcronyms
-        |> List.any isUpperString
-
-
-isUpperString : String -> Bool
-isUpperString phrase =
-    List.all Char.isUpper (String.toList phrase)
+    String.toUpper phrase == phrase && String.any Char.isUpper phrase
 
 
 isQuestion : String -> Bool
 isQuestion phrase =
-    case lastChar phrase of
-        Nothing ->
-            False
-
-        Just a ->
-            "?" == String.fromChar a
+    String.endsWith "?" phrase
 
 
 lastChar : String -> Maybe Char
 lastChar phrase =
     List.head (List.reverse (String.toList phrase))
-
-
-removeChars : String -> String
-removeChars phrase =
-    String.filter removeChar phrase
-
-
-removeChar : Char -> Bool
-removeChar char =
-    not (List.member char [ '!', '?' ])
-
-
-removeAcronyms : List String -> List String
-removeAcronyms phrases =
-    List.filter (\x -> x /= "OK") phrases
