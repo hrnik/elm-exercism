@@ -23,8 +23,3 @@ isShout phrase =
 isQuestion : String -> Bool
 isQuestion phrase =
     String.endsWith "?" phrase
-
-
-lastChar : String -> Maybe Char
-lastChar phrase =
-    List.head (List.reverse (String.toList phrase))
