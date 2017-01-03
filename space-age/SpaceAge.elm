@@ -14,35 +14,35 @@ type Planet
 
 ageOn : Planet -> Float -> Float
 ageOn planet age =
-    age / secondInYearOnPlanet planet
+    age / secondIn planet
 
 
-secondInYearOnPlanet : Planet -> Float
-secondInYearOnPlanet planet =
+orbitalPeriod : Planet -> Float
+orbitalPeriod planet =
     case planet of
         Earth ->
-            earthSecondInYear
+            1
 
         Mercury ->
-            secondFromEarthOrbitalPeriod 0.2408467
+            0.2408467
 
         Venus ->
-            secondFromEarthOrbitalPeriod 0.61519726
+            0.61519726
 
         Mars ->
-            secondFromEarthOrbitalPeriod 1.8808158
+            1.8808158
 
         Jupiter ->
-            secondFromEarthOrbitalPeriod 11.862615
+            11.862615
 
         Saturn ->
-            secondFromEarthOrbitalPeriod 29.447498
+            29.447498
 
         Uranus ->
-            secondFromEarthOrbitalPeriod 84.016846
+            84.016846
 
         Neptune ->
-            secondFromEarthOrbitalPeriod 164.79132
+            164.79132
 
 
 earthSecondInYear : Float
@@ -50,6 +50,6 @@ earthSecondInYear =
     31557600
 
 
-secondFromEarthOrbitalPeriod : Float -> Float
-secondFromEarthOrbitalPeriod period =
-    earthSecondInYear * period
+secondIn : Planet -> Float
+secondIn planet =
+    earthSecondInYear * orbitalPeriod planet
